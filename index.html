@@ -3,8 +3,9 @@
 <html lang="zh-CN">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <title>个人网站 | 刘宇韩</title>
+  <link rel="preload" as="image" href="./assets/profile-photo-mobile.jpg" />
   <style>
     @font-face {
       font-family: "Outfit";
@@ -50,6 +51,8 @@
       --glass: rgba(18, 31, 20, 0.64);
       --glass2: rgba(27, 42, 28, 0.66);
       --deep: #07100a;
+      --safe-top: env(safe-area-inset-top, 0px);
+      --safe-bottom: env(safe-area-inset-bottom, 0px);
     }
 
     * {
@@ -58,6 +61,8 @@
 
     html {
       scroll-behavior: smooth;
+      -webkit-text-size-adjust: 100%;
+      text-size-adjust: 100%;
     }
 
     body {
@@ -66,6 +71,7 @@
       background: var(--bg);
       font-family: "Outfit", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
       line-height: 1.7;
+      -webkit-tap-highlight-color: rgba(184, 217, 111, 0.18);
     }
 
     .site-bg-image {
@@ -761,6 +767,8 @@
       min-height: 680px;
       overflow: hidden;
       background:
+        linear-gradient(rgba(8, 18, 10, 0.08), rgba(8, 18, 10, 0.2)),
+        url("./assets/profile-photo-mobile.jpg") center / cover no-repeat,
         radial-gradient(circle at 60% 14%, rgba(55, 110, 255, 0.13), transparent 34%),
         var(--bg2);
     }
@@ -779,14 +787,22 @@
       font-size: 10px;
       letter-spacing: 0.1em;
       backdrop-filter: blur(14px);
+      z-index: 2;
+    }
+
+    .portrait-card picture,
+    .portrait-card img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      display: block;
     }
 
     .portrait-card img {
-      width: 100%;
-      height: 100%;
       object-fit: cover;
       object-position: center center;
-      display: block;
+      z-index: 0;
     }
 
     .portrait-caption {
@@ -799,6 +815,7 @@
       border-radius: 24px;
       background: rgba(255, 255, 255, 0.66);
       backdrop-filter: blur(20px);
+      z-index: 2;
     }
 
     .portrait-caption strong {
@@ -1580,15 +1597,17 @@
       position: fixed;
     }
 
-    .view-section {
+    body.js-enabled .view-section {
       display: none;
     }
 
-    .view-section.page-active {
+    body.js-enabled .view-section.active,
+    body.js-enabled .view-section.page-active {
       display: block;
     }
 
-    .hero.view-section.page-active {
+    body.js-enabled .hero.view-section.active,
+    body.js-enabled .hero.view-section.page-active {
       display: flex;
     }
 
@@ -1613,21 +1632,27 @@
       }
 
       .site-shell {
+        min-height: 100svh;
+        padding-bottom: calc(92px + var(--safe-bottom));
         overflow-x: hidden;
       }
 
       .nav {
-        top: 14px;
+        top: auto;
+        bottom: calc(12px + var(--safe-bottom));
         left: 12px;
         right: 12px;
         height: auto;
-        min-height: 72px;
-        padding: 10px 12px;
-        border-radius: 22px;
-        gap: 10px;
-        display: grid;
-        grid-template-columns: 36px 1fr;
+        min-height: 68px;
+        padding: 9px 10px;
+        border-radius: 24px;
+        gap: 8px;
+        display: block;
         align-items: center;
+      }
+
+      .brand {
+        display: none;
       }
 
       .brand-mark {
@@ -1640,7 +1665,7 @@
       .nav-links {
         display: grid;
         grid-template-columns: repeat(3, minmax(0, 1fr));
-        flex: 1;
+        width: 100%;
         max-width: none;
         gap: 6px;
         overflow: visible;
@@ -1667,7 +1692,7 @@
 
       .hero {
         min-height: auto;
-        padding: 126px 18px 56px;
+        padding: calc(28px + var(--safe-top)) 18px 56px;
         align-items: flex-start;
       }
 
@@ -1727,7 +1752,7 @@
       }
 
       .single-page-main {
-        padding-top: 82px;
+        padding-top: calc(18px + var(--safe-top));
       }
 
       .single-page-main .section,
@@ -1853,7 +1878,7 @@
 
       .footer {
         width: min(100% - 28px, 1180px);
-        padding: 28px 0 42px;
+        padding: 28px 0 calc(42px + var(--safe-bottom));
         font-size: 12px;
       }
     }
@@ -1974,7 +1999,10 @@
 
         <div class="about-grid">
           <figure class="portrait-card">
-            <img src="./assets/profile-photo.jpg" alt="个人头像图片" />
+            <picture>
+              <source srcset="./assets/profile-photo-mobile.jpg" type="image/jpeg" />
+              <img src="./assets/profile-photo-mobile.jpg" alt="个人头像图片" loading="eager" decoding="async" />
+            </picture>
             <figcaption class="portrait-caption">
               <strong>刘宇韩</strong>
               <span>大专学生 / 前端学习者 / 数字内容创作者</span>
@@ -2182,6 +2210,7 @@
 
   <script>
     (function () {
+      document.body.classList.add("js-enabled");
       var sections = Array.prototype.slice.call(document.querySelectorAll(".view-section"));
       var links = Array.prototype.slice.call(document.querySelectorAll("[data-page-link]"));
 
