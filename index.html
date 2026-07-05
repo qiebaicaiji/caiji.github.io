@@ -40,17 +40,17 @@
     }
 
     :root {
-      --bg: #0b120d;
-      --bg2: rgba(19, 29, 20, 0.82);
-      --ink: #f2efd9;
-      --muted: #bec9a9;
-      --rule: rgba(211, 226, 184, 0.22);
-      --accent: #b8d96f;
-      --accent2: #e0a15f;
-      --shadow: rgba(0, 0, 0, 0.32);
-      --glass: rgba(18, 31, 20, 0.64);
-      --glass2: rgba(27, 42, 28, 0.66);
-      --deep: #07100a;
+      --bg: #071527;
+      --bg2: rgba(18, 48, 88, 0.78);
+      --ink: #eef7ff;
+      --muted: #b7d4f4;
+      --rule: rgba(150, 205, 255, 0.26);
+      --accent: #5eb6ff;
+      --accent2: #7f8cff;
+      --shadow: rgba(3, 12, 28, 0.34);
+      --glass: rgba(13, 42, 82, 0.62);
+      --glass2: rgba(24, 64, 116, 0.7);
+      --deep: #0a2344;
       --safe-top: env(safe-area-inset-top, 0px);
       --safe-bottom: env(safe-area-inset-bottom, 0px);
     }
@@ -71,28 +71,26 @@
       background: var(--bg);
       font-family: "Outfit", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
       line-height: 1.7;
-      -webkit-tap-highlight-color: rgba(184, 217, 111, 0.18);
+      -webkit-tap-highlight-color: rgba(94, 182, 255, 0.2);
     }
 
-    .site-bg-image {
+    .site-bg-gif {
       position: fixed;
       inset: 0;
       z-index: 0;
       pointer-events: none;
-      background-image: url("./assets/forest-background.jpg");
+      background-image: url("./assets/page-background.gif");
       background-size: cover;
       background-position: center;
       background-repeat: no-repeat;
-      filter: saturate(1.08) contrast(1.08) brightness(0.82);
+      filter: saturate(1.12) contrast(1.08) brightness(1);
     }
 
-    .site-bg-image::after {
+    .site-bg-gif::after {
       content: "";
       position: absolute;
       inset: 0;
-      background:
-        radial-gradient(circle at 50% 18%, rgba(231, 222, 164, 0.18), transparent 28%),
-        linear-gradient(180deg, rgba(5, 12, 8, 0.36), rgba(5, 12, 8, 0.76));
+      background: transparent;
     }
 
     a {
@@ -954,6 +952,134 @@
 
     .contact-section .contact-list a {
       font-size: 18px;
+    }
+
+    .contact-interactive-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.35fr) minmax(280px, 0.65fr);
+      gap: 24px;
+      align-items: stretch;
+    }
+
+    .message-form-card {
+      position: relative;
+      padding: clamp(28px, 4vw, 46px);
+      border: 1px solid rgba(211, 226, 184, 0.24);
+      border-radius: 34px;
+      background:
+        radial-gradient(circle at 88% 12%, rgba(184, 217, 111, 0.11), transparent 32%),
+        linear-gradient(145deg, rgba(19, 29, 39, 0.72), rgba(18, 31, 20, 0.76));
+      box-shadow: 0 30px 96px rgba(0, 0, 0, 0.34);
+      backdrop-filter: blur(22px);
+      overflow: hidden;
+    }
+
+    .message-form-card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(120deg, rgba(255, 255, 255, 0.08), transparent 34%),
+        radial-gradient(circle at 16% 92%, rgba(224, 161, 95, 0.12), transparent 30%);
+      pointer-events: none;
+    }
+
+    .contact-form {
+      position: relative;
+      display: grid;
+      gap: 22px;
+      z-index: 1;
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 22px;
+    }
+
+    .form-field {
+      display: grid;
+      gap: 10px;
+    }
+
+    .form-field label {
+      color: var(--ink);
+      font-weight: 700;
+      letter-spacing: 0.02em;
+    }
+
+    .form-field input,
+    .form-field textarea {
+      width: 100%;
+      border: 2px solid rgba(211, 226, 184, 0.24);
+      border-radius: 14px;
+      outline: 0;
+      color: var(--ink);
+      background: rgba(242, 239, 217, 0.06);
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04);
+      font: inherit;
+      transition: border-color 180ms ease, box-shadow 180ms ease, background 180ms ease;
+    }
+
+    .form-field input {
+      min-height: 58px;
+      padding: 0 18px;
+    }
+
+    .form-field textarea {
+      min-height: 166px;
+      padding: 16px 18px;
+      resize: vertical;
+    }
+
+    .form-field input::placeholder,
+    .form-field textarea::placeholder {
+      color: rgba(242, 239, 217, 0.42);
+    }
+
+    .form-field input:focus,
+    .form-field textarea:focus {
+      border-color: rgba(184, 217, 111, 0.72);
+      background: rgba(242, 239, 217, 0.1);
+      box-shadow: 0 0 0 4px rgba(184, 217, 111, 0.12);
+    }
+
+    .send-message-button {
+      width: 100%;
+      min-height: 68px;
+      border: 0;
+      border-radius: 999px;
+      color: #ffffff;
+      background: linear-gradient(105deg, #6b5ff5, #36a8e8 48%, #18c8b7);
+      box-shadow: 0 18px 38px rgba(24, 200, 183, 0.22);
+      font: inherit;
+      font-size: 20px;
+      font-weight: 800;
+      cursor: pointer;
+      transition: transform 180ms ease, box-shadow 180ms ease, filter 180ms ease;
+    }
+
+    .send-message-button:hover {
+      transform: translateY(-2px);
+      filter: saturate(1.08);
+      box-shadow: 0 24px 48px rgba(24, 200, 183, 0.28);
+    }
+
+    .send-message-button:active {
+      transform: translateY(0);
+    }
+
+    .form-status {
+      min-height: 22px;
+      margin: -6px 0 0;
+      color: var(--accent);
+      font-size: 14px;
+    }
+
+    .contact-quick-card {
+      width: 100%;
+      min-height: 100%;
+      margin: 0;
     }
 
     .location-card {
@@ -1865,6 +1991,34 @@
         min-height: auto;
       }
 
+      .contact-interactive-grid {
+        grid-template-columns: 1fr;
+        gap: 18px;
+      }
+
+      .message-form-card {
+        padding: 22px;
+        border-radius: 28px;
+      }
+
+      .form-row {
+        grid-template-columns: 1fr;
+        gap: 18px;
+      }
+
+      .form-field input {
+        min-height: 54px;
+      }
+
+      .form-field textarea {
+        min-height: 150px;
+      }
+
+      .send-message-button {
+        min-height: 58px;
+        font-size: 17px;
+      }
+
       .contact-list a {
         display: grid;
         grid-template-columns: 1fr;
@@ -1925,10 +2079,133 @@
     .portrait-caption {
       z-index: 2 !important;
     }
+
+    .nav,
+    .hero-card,
+    .portrait-card,
+    .self-intro-card,
+    .location-card,
+    .panel-card,
+    .contact-card,
+    .experience-card,
+    .message-form-card {
+      border-color: rgba(138, 201, 255, 0.34) !important;
+      background:
+        linear-gradient(145deg, rgba(22, 74, 132, 0.46), rgba(9, 32, 66, 0.34)) !important;
+      box-shadow: 0 24px 72px rgba(3, 12, 28, 0.22) !important;
+      backdrop-filter: blur(12px);
+    }
+
+    .hero::before {
+      background:
+        radial-gradient(circle at 50% 18%, rgba(94, 182, 255, 0.1), transparent 30%),
+        linear-gradient(115deg, rgba(4, 18, 42, 0.32), rgba(12, 49, 94, 0.16) 50%, rgba(5, 20, 44, 0.36)) !important;
+    }
+
+    .hero::after {
+      background-image:
+        linear-gradient(rgba(184, 220, 255, 0.06) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(184, 220, 255, 0.06) 1px, transparent 1px) !important;
+    }
+
+    .title-accent,
+    .city-name span {
+      background: linear-gradient(105deg, #eef7ff, #6ec6ff 48%, #9fa8ff) !important;
+      background-clip: text !important;
+      -webkit-background-clip: text !important;
+    }
+
+    .brand-mark,
+    .primary-button,
+    .secondary-button,
+    .contact-button {
+      color: #eef7ff !important;
+      border: 1px solid rgba(138, 201, 255, 0.42) !important;
+      background: linear-gradient(145deg, rgba(35, 120, 218, 0.92), rgba(15, 64, 128, 0.78)) !important;
+      box-shadow: 0 18px 38px rgba(3, 12, 28, 0.32) !important;
+    }
+
+    .data-chip,
+    .floating-panel,
+    .code-window,
+    .coordinate-item,
+    .map-tag,
+    .experience-metric,
+    .radar-wrap,
+    .portrait-caption {
+      border-color: rgba(138, 201, 255, 0.3) !important;
+      background: rgba(12, 45, 92, 0.62) !important;
+      color: #b7d4f4 !important;
+      box-shadow: 0 16px 46px rgba(3, 12, 28, 0.26) !important;
+    }
+
+    .portrait-card::after {
+      color: #d9ecff !important;
+      border-color: rgba(138, 201, 255, 0.34) !important;
+      background: rgba(12, 45, 92, 0.68) !important;
+    }
+
+    .map-panel {
+      border-color: rgba(138, 201, 255, 0.34) !important;
+      background:
+        linear-gradient(rgba(184, 220, 255, 0.085) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(184, 220, 255, 0.085) 1px, transparent 1px),
+        radial-gradient(circle at 50% 52%, rgba(94, 182, 255, 0.18), transparent 32%),
+        rgba(10, 38, 82, 0.54) !important;
+      background-size: 42px 42px, 42px 42px, auto, auto !important;
+    }
+
+    .form-field input,
+    .form-field textarea {
+      color: #eef7ff !important;
+      border-color: rgba(138, 201, 255, 0.34) !important;
+      background: rgba(7, 27, 61, 0.5) !important;
+    }
+
+    .form-field input::placeholder,
+    .form-field textarea::placeholder {
+      color: rgba(183, 212, 244, 0.62) !important;
+    }
+
+    .form-field input:focus,
+    .form-field textarea:focus {
+      border-color: rgba(94, 182, 255, 0.86) !important;
+      box-shadow: 0 0 0 4px rgba(94, 182, 255, 0.18) !important;
+    }
+
+    .send-message-button {
+      color: #eef7ff !important;
+      background: linear-gradient(105deg, #285dff, #2aa8ff 52%, #00d4ff) !important;
+      box-shadow: 0 18px 38px rgba(42, 168, 255, 0.24) !important;
+    }
+
+    .radar-grid {
+      fill: rgba(94, 182, 255, 0.08) !important;
+      stroke: rgba(184, 220, 255, 0.24) !important;
+    }
+
+    .radar-axis {
+      stroke: rgba(184, 220, 255, 0.18) !important;
+    }
+
+    .radar-fill {
+      fill: rgba(94, 182, 255, 0.22) !important;
+      stroke: rgba(110, 198, 255, 0.72) !important;
+    }
+
+    .radar-point {
+      fill: #0a2344 !important;
+      stroke: #6ec6ff !important;
+    }
+
+    .footer {
+      color: #b7d4f4 !important;
+      border-top-color: rgba(138, 201, 255, 0.26) !important;
+    }
 </style>
 </head>
 <body>
-  <div class="site-bg-image" aria-hidden="true"></div>
+  <div class="site-bg-gif" aria-hidden="true"></div>
   <div class="site-shell">
     <nav class="nav app-nav" aria-label="主导航">
         <a class="brand" href="#home" data-page-link="home" aria-label="返回首页">
@@ -2213,15 +2490,45 @@
           </p>
         </div>
 
-        <aside class="contact-card">
-          <h3 class="card-title">联系方式</h3>
-          <ul class="contact-list">
-            <li><a href="mailto:wjwbsuwh@163.com"><span>邮箱</span><span>wjwbsuwh@163.com</span></a></li>
-            <li><a href="tel:19959229060"><span>电话</span><span>19959229060</span></a></li>
-            <li><a href="#"><span>微信</span><span>lyhqiebaicaiji</span></a></li>
-            <li><a href="#location" data-page-link="location"><span>城市</span><span>泉州</span></a></li>
-          </ul>
-        </aside>
+        <div class="contact-interactive-grid">
+          <article class="message-form-card">
+            <form class="contact-form" id="contactForm">
+              <div class="form-row">
+                <div class="form-field">
+                  <label for="contactName">姓名</label>
+                  <input id="contactName" name="name" type="text" placeholder="请输入您的姓名" autocomplete="name" required />
+                </div>
+                <div class="form-field">
+                  <label for="contactEmail">邮箱</label>
+                  <input id="contactEmail" name="email" type="email" placeholder="请输入您的邮箱" autocomplete="email" required />
+                </div>
+              </div>
+
+              <div class="form-field">
+                <label for="contactSubject">主题</label>
+                <input id="contactSubject" name="subject" type="text" placeholder="请输入主题" required />
+              </div>
+
+              <div class="form-field">
+                <label for="contactMessage">留言</label>
+                <textarea id="contactMessage" name="message" placeholder="请输入您的留言内容" required></textarea>
+              </div>
+
+              <button class="send-message-button" type="submit">发送消息</button>
+              <p class="form-status" id="formStatus" aria-live="polite"></p>
+            </form>
+          </article>
+
+          <aside class="contact-card contact-quick-card">
+            <h3 class="card-title">快捷联系</h3>
+            <ul class="contact-list">
+              <li><a href="mailto:wjwbsuwh@163.com"><span>邮箱</span><span>wjwbsuwh@163.com</span></a></li>
+              <li><a href="tel:19959229060"><span>电话</span><span>19959229060</span></a></li>
+              <li><a href="#" id="copyWechat"><span>微信</span><span>lyhqiebaicaiji</span></a></li>
+              <li><a href="#location" data-page-link="location"><span>城市</span><span>泉州</span></a></li>
+            </ul>
+          </aside>
+        </div>
       </section>
     </main>
 
@@ -2263,6 +2570,53 @@
       window.addEventListener("hashchange", function () {
         showPage((window.location.hash || "#home").slice(1));
       });
+
+      var contactForm = document.getElementById("contactForm");
+      var formStatus = document.getElementById("formStatus");
+      var copyWechat = document.getElementById("copyWechat");
+
+      if (contactForm) {
+        contactForm.addEventListener("submit", function (event) {
+          event.preventDefault();
+          var formData = new FormData(contactForm);
+          var name = String(formData.get("name") || "").trim();
+          var email = String(formData.get("email") || "").trim();
+          var subject = String(formData.get("subject") || "来自个人网站的留言").trim();
+          var message = String(formData.get("message") || "").trim();
+
+          if (!name || !email || !subject || !message) {
+            if (formStatus) formStatus.textContent = "请先填写完整信息。";
+            return;
+          }
+
+          var body = [
+            "姓名：" + name,
+            "邮箱：" + email,
+            "",
+            "留言内容：",
+            message
+          ].join("\n");
+
+          window.location.href = "mailto:wjwbsuwh@163.com?subject=" + encodeURIComponent(subject) + "&body=" + encodeURIComponent(body);
+          if (formStatus) formStatus.textContent = "正在打开邮箱客户端，请确认发送。";
+        });
+      }
+
+      if (copyWechat) {
+        copyWechat.addEventListener("click", function (event) {
+          event.preventDefault();
+          var wechat = "lyhqiebaicaiji";
+          if (navigator.clipboard && navigator.clipboard.writeText) {
+            navigator.clipboard.writeText(wechat).then(function () {
+              if (formStatus) formStatus.textContent = "微信号已复制：" + wechat;
+            }).catch(function () {
+              if (formStatus) formStatus.textContent = "微信号：" + wechat;
+            });
+          } else if (formStatus) {
+            formStatus.textContent = "微信号：" + wechat;
+          }
+        });
+      }
 
       showPage((window.location.hash || "#home").slice(1));
     })();
